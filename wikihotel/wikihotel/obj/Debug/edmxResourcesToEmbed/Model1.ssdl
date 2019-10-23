@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_hotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'db_hotel.dbo.booking' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="booking">
+    <Key>
+      <PropertyRef Name="checkin_date" />
+    </Key>
+    <Property Name="id" Type="int" />
+    <Property Name="id_user" Type="int" />
+    <Property Name="id_hotel" Type="int" />
+    <Property Name="checkin_date" Type="datetime" Nullable="false" />
+    <Property Name="checkout_date" Type="nchar" MaxLength="10" />
+    <Property Name="day_stay" Type="int" />
+  </EntityType>
+  <EntityType Name="hotel">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="description" Type="text" />
+    <Property Name="price" Type="float" />
+    <Property Name="city" Type="varchar" MaxLength="50" />
+    <Property Name="country" Type="varchar" MaxLength="50" />
+    <Property Name="rating" Type="float" />
+    <Property Name="class" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'db_hotel.dbo.user' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="user">
+          <Property Name="id" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="username" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+  <EntityContainer Name="db_hotelModelStoreContainer">
+    <EntitySet Name="hotel" EntityType="Self.hotel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="booking" EntityType="Self.booking" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [booking].[id] AS [id], 
+    [booking].[id_user] AS [id_user], 
+    [booking].[id_hotel] AS [id_hotel], 
+    [booking].[checkin_date] AS [checkin_date], 
+    [booking].[checkout_date] AS [checkout_date], 
+    [booking].[day_stay] AS [day_stay]
+    FROM [dbo].[booking] AS [booking]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_hotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'db_hotel.dbo.booking' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="booking">
+          <Key>
+            <PropertyRef Name="checkin_date" />
+          </Key>
+          <Property Name="id" Type="int" />
+          <Property Name="id_user" Type="int" />
+          <Property Name="id_hotel" Type="int" />
+          <Property Name="checkin_date" Type="datetime" Nullable="false" />
+          <Property Name="checkout_date" Type="nchar" MaxLength="10" />
+          <Property Name="day_stay" Type="int" />
+        </EntityType>
+        <EntityType Name="hotel">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="text" />
+          <Property Name="price" Type="float" />
+          <Property Name="city" Type="varchar" MaxLength="50" />
+          <Property Name="country" Type="varchar" MaxLength="50" />
+          <Property Name="rating" Type="float" />
+          <Property Name="class" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'db_hotel.dbo.user' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="user">
+          <Property Name="id" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="username" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+        <EntityContainer Name="db_hotelModelStoreContainer">
+          <EntitySet Name="hotel" EntityType="Self.hotel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="booking" EntityType="Self.booking" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [booking].[id] AS [id], 
+    [booking].[id_user] AS [id_user], 
+    [booking].[id_hotel] AS [id_hotel], 
+    [booking].[checkin_date] AS [checkin_date], 
+    [booking].[checkout_date] AS [checkout_date], 
+    [booking].[day_stay] AS [day_stay]
+    FROM [dbo].[booking] AS [booking]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_hotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="hotel">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Double" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rating" Type="Double" />
+          <Property Name="class" Type="Int32" />
+        </EntityType>
+        <EntityType Name="booking">
+          <Key>
+            <PropertyRef Name="checkin_date" />
+          </Key>
+          <Property Name="id" Type="Int32" />
+          <Property Name="id_user" Type="Int32" />
+          <Property Name="id_hotel" Type="Int32" />
+          <Property Name="checkin_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="checkout_date" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="day_stay" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="db_hotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="hotels" EntityType="Self.hotel" />
+          <EntitySet Name="bookings" EntityType="Self.booking" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_hotelModelStoreContainer" CdmEntityContainer="db_hotelEntities">
+          <EntitySetMapping Name="hotels">
+            <EntityTypeMapping TypeName="db_hotelModel.hotel">
+              <MappingFragment StoreEntitySet="hotel">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="class" ColumnName="class" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bookings">
+            <EntityTypeMapping TypeName="db_hotelModel.booking">
+              <MappingFragment StoreEntitySet="booking">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_hotel" ColumnName="id_hotel" />
+                <ScalarProperty Name="checkin_date" ColumnName="checkin_date" />
+                <ScalarProperty Name="checkout_date" ColumnName="checkout_date" />
+                <ScalarProperty Name="day_stay" ColumnName="day_stay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

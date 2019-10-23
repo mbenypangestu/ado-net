@@ -1,1 +1,5 @@
 C:\Users\Student\Documents\2110161008\wikihotel\wikihotel\bin\Debug\wikihotel.exe.config
+C:\Users\Student\Documents\2110161008\wikihotel\wikihotel\obj\Debug\wikihotel.csprojResolveAssemblyReference.cache
+C:\Users\Student\Documents\2110161008\wikihotel\wikihotel\obj\Debug\wikihotel.Form1.resources
+C:\Users\Student\Documents\2110161008\wikihotel\wikihotel\obj\Debug\wikihotel.Properties.Resources.resources
+C:\Users\Student\Documents\2110161008\wikihotel\wikihotel\obj\Debug\wikihotel.csproj.GenerateResource.Cache
