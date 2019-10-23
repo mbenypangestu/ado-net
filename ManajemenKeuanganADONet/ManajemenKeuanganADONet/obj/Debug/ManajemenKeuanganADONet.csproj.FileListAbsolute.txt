@@ -1,0 +1,11 @@
+C:\Users\Student\Documents\2110161008\ManajemenKeuanganADONet\ManajemenKeuanganADONet\bin\Debug\ManajemenKeuanganADONet.exe.config
+C:\Users\Student\Documents\2110161008\ManajemenKeuanganADONet\ManajemenKeuanganADONet\bin\Debug\ManajemenKeuanganADONet.exe
+C:\Users\Student\Documents\2110161008\ManajemenKeuanganADONet\ManajemenKeuanganADONet\bin\Debug\ManajemenKeuanganADONet.pdb
+C:\Users\Student\Documents\2110161008\ManajemenKeuanganADONet\ManajemenKeuanganADONet\obj\Debug\ManajemenKeuanganADONet.csprojResolveAssemblyReference.cache
+C:\Users\Student\Documents\2110161008\ManajemenKeuanganADONet\ManajemenKeuanganADONet\obj\Debug\ManajemenKeuanganADONet.Form1.resources
+C:\Users\Student\Documents\2110161008\ManajemenKeuanganADONet\ManajemenKeuanganADONet\obj\Debug\ManajemenKeuanganADONet.Properties.Resources.resources
+C:\Users\Student\Documents\2110161008\ManajemenKeuanganADONet\ManajemenKeuanganADONet\obj\Debug\ManajemenKeuanganADONet.csproj.GenerateResource.Cache
+C:\Users\Student\Documents\2110161008\ManajemenKeuanganADONet\ManajemenKeuanganADONet\obj\Debug\ManajemenKeuanganADONet.exe
+C:\Users\Student\Documents\2110161008\ManajemenKeuanganADONet\ManajemenKeuanganADONet\obj\Debug\ManajemenKeuanganADONet.pdb
+C:\Users\Student\Documents\2110161008\ManajemenKeuanganADONet\ManajemenKeuanganADONet\obj\Debug\ManajemenKeuanganADONet.Transaksi.resources
+C:\Users\Student\Documents\2110161008\ManajemenKeuanganADONet\ManajemenKeuanganADONet\obj\Debug\ManajemenKeuanganADONet.Ternak.resources

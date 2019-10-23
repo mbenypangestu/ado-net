@@ -1,0 +1,14 @@
+C:\Users\Student\Documents\2110161008\Tabungan\Tabungan\bin\Debug\Tabungan.exe.config
+C:\Users\Student\Documents\2110161008\Tabungan\Tabungan\bin\Debug\Tabungan.exe
+C:\Users\Student\Documents\2110161008\Tabungan\Tabungan\bin\Debug\Tabungan.pdb
+C:\Users\Student\Documents\2110161008\Tabungan\Tabungan\obj\Debug\Tabungan.Properties.Resources.resources
+C:\Users\Student\Documents\2110161008\Tabungan\Tabungan\obj\Debug\Tabungan.csproj.GenerateResource.Cache
+C:\Users\Student\Documents\2110161008\Tabungan\Tabungan\obj\Debug\Tabungan.exe
+C:\Users\Student\Documents\2110161008\Tabungan\Tabungan\obj\Debug\Tabungan.pdb
+C:\Users\Student\Documents\2110161008\Tabungan\Tabungan\obj\Debug\Tabungan.FormMenu.resources
+C:\Users\Student\Documents\2110161008\Tabungan\Tabungan\obj\Debug\Tabungan.Form1.resources
+C:\Users\Student\Documents\2110161008\Tabungan\Tabungan\obj\Debug\Tabungan.FormSaldo.resources
+C:\Users\Student\Documents\2110161008\Tabungan\Tabungan\obj\Debug\Tabungan.FormSetor.resources
+C:\Users\Student\Documents\2110161008\Tabungan\Tabungan\obj\Debug\Tabungan.FormTarik.resources
+C:\Users\Student\Documents\2110161008\Tabungan\Tabungan\obj\Debug\Tabungan.FormTransfer.resources
+C:\Users\Student\Documents\2110161008\Tabungan\Tabungan\obj\Debug\Tabungan.FormDollar.resources

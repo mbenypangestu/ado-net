@@ -1,0 +1,9 @@
+C:\Users\Student\Documents\2110161008\GajiPokok\GajiPokok\bin\Debug\GajiPokok.exe.config
+C:\Users\Student\Documents\2110161008\GajiPokok\GajiPokok\bin\Debug\GajiPokok.exe
+C:\Users\Student\Documents\2110161008\GajiPokok\GajiPokok\bin\Debug\GajiPokok.pdb
+C:\Users\Student\Documents\2110161008\GajiPokok\GajiPokok\obj\Debug\GajiPokok.csprojResolveAssemblyReference.cache
+C:\Users\Student\Documents\2110161008\GajiPokok\GajiPokok\obj\Debug\GajiPokok.Form1.resources
+C:\Users\Student\Documents\2110161008\GajiPokok\GajiPokok\obj\Debug\GajiPokok.Properties.Resources.resources
+C:\Users\Student\Documents\2110161008\GajiPokok\GajiPokok\obj\Debug\GajiPokok.csproj.GenerateResource.Cache
+C:\Users\Student\Documents\2110161008\GajiPokok\GajiPokok\obj\Debug\GajiPokok.exe
+C:\Users\Student\Documents\2110161008\GajiPokok\GajiPokok\obj\Debug\GajiPokok.pdb
