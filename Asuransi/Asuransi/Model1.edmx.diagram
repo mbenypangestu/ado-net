@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6ef7cdecb6db468591a93ce29b4afbf1" Name="Diagram1">
+        <EntityTypeShape EntityType="db_asuransiContextModel.Admin" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_asuransiContextModel.Asuransi_nasabah" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_asuransiContextModel.Jenis_asuransi" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_asuransiContextModel.Nasabah" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_asuransiContextModel.Pembayaran_klaim" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_asuransiContextModel.Setoran" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_asuransiContextModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="db_asuransiContextModel.FK_Pembayaran_klaim_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="db_asuransiContextModel.FK_Setoran_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="db_asuransiContextModel.FK_asuransi_nasabah_Jenis_asuransi" ManuallyRouted="false" />
+        <AssociationConnector Association="db_asuransiContextModel.FK_asuransi_nasabah_Nasabah" ManuallyRouted="false" />
+        <AssociationConnector Association="db_asuransiContextModel.FK_Pembayaran_klaim_Jenis_asuransi" ManuallyRouted="false" />
+        <AssociationConnector Association="db_asuransiContextModel.FK_Setoran_Jenis_asuransi" ManuallyRouted="false" />
+        <AssociationConnector Association="db_asuransiContextModel.FK_Pembayaran_klaim_Nasabah" ManuallyRouted="false" />
+        <AssociationConnector Association="db_asuransiContextModel.FK_Setoran_Nasabah" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

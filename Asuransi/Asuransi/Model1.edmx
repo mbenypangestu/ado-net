@@ -1,0 +1,561 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_asuransiContextModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id_pegawai" />
+          </Key>
+          <Property Name="id_pegawai" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nama_pegawai" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Asuransi_nasabah">
+          <Key>
+            <PropertyRef Name="id_asuransi" />
+          </Key>
+          <Property Name="id_asuransi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_nasabah" Type="int" Nullable="false" />
+          <Property Name="kode_asuransi" Type="int" Nullable="false" />
+          <Property Name="uang_nasabah" Type="int" />
+          <Property Name="masa_asuransi" Type="date" />
+        </EntityType>
+        <EntityType Name="Jenis_asuransi">
+          <Key>
+            <PropertyRef Name="kode_asuransi" />
+          </Key>
+          <Property Name="kode_asuransi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jenis_asuransi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="nilai_asuransi" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nasabah">
+          <Key>
+            <PropertyRef Name="id_nasabah" />
+          </Key>
+          <Property Name="id_nasabah" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_asuransi" Type="int" Nullable="false" />
+          <Property Name="nama_nasabah" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="no_identitas" Type="int" Nullable="false" />
+          <Property Name="tempat_lahir" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="tanggal_lahir" Type="date" Nullable="false" />
+          <Property Name="jenis_kelamin" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="status" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="pekerjaan" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="penghasilan" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="alamat" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="no_telp" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pembayaran_klaim">
+          <Key>
+            <PropertyRef Name="no_pembayaran_klaim" />
+          </Key>
+          <Property Name="no_pembayaran_klaim" Type="int" Nullable="false" />
+          <Property Name="id_nasabah" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kode_asuransi" Type="int" Nullable="false" />
+          <Property Name="id_pegawai" Type="int" Nullable="false" />
+          <Property Name="tanggal_klaim" Type="date" Nullable="false" />
+          <Property Name="jumlah_bayar" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Setoran">
+          <Key>
+            <PropertyRef Name="no_setoran" />
+          </Key>
+          <Property Name="no_setoran" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_nasabah" Type="int" />
+          <Property Name="kode_asuransi" Type="int" Nullable="false" />
+          <Property Name="id_pegawai" Type="int" />
+          <Property Name="tanggal_setoran" Type="date" />
+          <Property Name="jumlah_bayar" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_asuransi_nasabah_Jenis_asuransi">
+          <End Role="Jenis_asuransi" Type="Self.Jenis_asuransi" Multiplicity="1" />
+          <End Role="Asuransi_nasabah" Type="Self.Asuransi_nasabah" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jenis_asuransi">
+              <PropertyRef Name="kode_asuransi" />
+            </Principal>
+            <Dependent Role="Asuransi_nasabah">
+              <PropertyRef Name="kode_asuransi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_asuransi_nasabah_Nasabah">
+          <End Role="Nasabah" Type="Self.Nasabah" Multiplicity="1" />
+          <End Role="Asuransi_nasabah" Type="Self.Asuransi_nasabah" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nasabah">
+              <PropertyRef Name="id_nasabah" />
+            </Principal>
+            <Dependent Role="Asuransi_nasabah">
+              <PropertyRef Name="id_nasabah" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pembayaran_klaim_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="Pembayaran_klaim" Type="Self.Pembayaran_klaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="id_pegawai" />
+            </Principal>
+            <Dependent Role="Pembayaran_klaim">
+              <PropertyRef Name="id_pegawai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pembayaran_klaim_Jenis_asuransi">
+          <End Role="Jenis_asuransi" Type="Self.Jenis_asuransi" Multiplicity="1" />
+          <End Role="Pembayaran_klaim" Type="Self.Pembayaran_klaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jenis_asuransi">
+              <PropertyRef Name="kode_asuransi" />
+            </Principal>
+            <Dependent Role="Pembayaran_klaim">
+              <PropertyRef Name="kode_asuransi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pembayaran_klaim_Nasabah">
+          <End Role="Nasabah" Type="Self.Nasabah" Multiplicity="1" />
+          <End Role="Pembayaran_klaim" Type="Self.Pembayaran_klaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nasabah">
+              <PropertyRef Name="id_nasabah" />
+            </Principal>
+            <Dependent Role="Pembayaran_klaim">
+              <PropertyRef Name="id_nasabah" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Setoran_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Setoran" Type="Self.Setoran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="id_pegawai" />
+            </Principal>
+            <Dependent Role="Setoran">
+              <PropertyRef Name="id_pegawai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Setoran_Jenis_asuransi">
+          <End Role="Jenis_asuransi" Type="Self.Jenis_asuransi" Multiplicity="1" />
+          <End Role="Setoran" Type="Self.Setoran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jenis_asuransi">
+              <PropertyRef Name="kode_asuransi" />
+            </Principal>
+            <Dependent Role="Setoran">
+              <PropertyRef Name="kode_asuransi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Setoran_Nasabah">
+          <End Role="Nasabah" Type="Self.Nasabah" Multiplicity="0..1" />
+          <End Role="Setoran" Type="Self.Setoran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nasabah">
+              <PropertyRef Name="id_nasabah" />
+            </Principal>
+            <Dependent Role="Setoran">
+              <PropertyRef Name="id_nasabah" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_asuransiContextModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Asuransi_nasabah" EntityType="Self.Asuransi_nasabah" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jenis_asuransi" EntityType="Self.Jenis_asuransi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nasabah" EntityType="Self.Nasabah" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pembayaran_klaim" EntityType="Self.Pembayaran_klaim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Setoran" EntityType="Self.Setoran" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_asuransi_nasabah_Jenis_asuransi" Association="Self.FK_asuransi_nasabah_Jenis_asuransi">
+            <End Role="Jenis_asuransi" EntitySet="Jenis_asuransi" />
+            <End Role="Asuransi_nasabah" EntitySet="Asuransi_nasabah" />
+          </AssociationSet>
+          <AssociationSet Name="FK_asuransi_nasabah_Nasabah" Association="Self.FK_asuransi_nasabah_Nasabah">
+            <End Role="Nasabah" EntitySet="Nasabah" />
+            <End Role="Asuransi_nasabah" EntitySet="Asuransi_nasabah" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pembayaran_klaim_Admin" Association="Self.FK_Pembayaran_klaim_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Pembayaran_klaim" EntitySet="Pembayaran_klaim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pembayaran_klaim_Jenis_asuransi" Association="Self.FK_Pembayaran_klaim_Jenis_asuransi">
+            <End Role="Jenis_asuransi" EntitySet="Jenis_asuransi" />
+            <End Role="Pembayaran_klaim" EntitySet="Pembayaran_klaim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pembayaran_klaim_Nasabah" Association="Self.FK_Pembayaran_klaim_Nasabah">
+            <End Role="Nasabah" EntitySet="Nasabah" />
+            <End Role="Pembayaran_klaim" EntitySet="Pembayaran_klaim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Setoran_Admin" Association="Self.FK_Setoran_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Setoran" EntitySet="Setoran" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Setoran_Jenis_asuransi" Association="Self.FK_Setoran_Jenis_asuransi">
+            <End Role="Jenis_asuransi" EntitySet="Jenis_asuransi" />
+            <End Role="Setoran" EntitySet="Setoran" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Setoran_Nasabah" Association="Self.FK_Setoran_Nasabah">
+            <End Role="Nasabah" EntitySet="Nasabah" />
+            <End Role="Setoran" EntitySet="Setoran" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_asuransiContextModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id_pegawai" />
+          </Key>
+          <Property Name="id_pegawai" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nama_pegawai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Pembayaran_klaim" Relationship="Self.FK_Pembayaran_klaim_Admin" FromRole="Admin" ToRole="Pembayaran_klaim" />
+          <NavigationProperty Name="Setoran" Relationship="Self.FK_Setoran_Admin" FromRole="Admin" ToRole="Setoran" />
+        </EntityType>
+        <EntityType Name="Asuransi_nasabah">
+          <Key>
+            <PropertyRef Name="id_asuransi" />
+          </Key>
+          <Property Name="id_asuransi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_nasabah" Type="Int32" Nullable="false" />
+          <Property Name="kode_asuransi" Type="Int32" Nullable="false" />
+          <Property Name="uang_nasabah" Type="Int32" />
+          <Property Name="masa_asuransi" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Jenis_asuransi" Relationship="Self.FK_asuransi_nasabah_Jenis_asuransi" FromRole="Asuransi_nasabah" ToRole="Jenis_asuransi" />
+          <NavigationProperty Name="Nasabah" Relationship="Self.FK_asuransi_nasabah_Nasabah" FromRole="Asuransi_nasabah" ToRole="Nasabah" />
+        </EntityType>
+        <EntityType Name="Jenis_asuransi">
+          <Key>
+            <PropertyRef Name="kode_asuransi" />
+          </Key>
+          <Property Name="kode_asuransi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jenis_asuransi1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nilai_asuransi" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Asuransi_nasabah" Relationship="Self.FK_asuransi_nasabah_Jenis_asuransi" FromRole="Jenis_asuransi" ToRole="Asuransi_nasabah" />
+          <NavigationProperty Name="Pembayaran_klaim" Relationship="Self.FK_Pembayaran_klaim_Jenis_asuransi" FromRole="Jenis_asuransi" ToRole="Pembayaran_klaim" />
+          <NavigationProperty Name="Setoran" Relationship="Self.FK_Setoran_Jenis_asuransi" FromRole="Jenis_asuransi" ToRole="Setoran" />
+        </EntityType>
+        <EntityType Name="Nasabah">
+          <Key>
+            <PropertyRef Name="id_nasabah" />
+          </Key>
+          <Property Name="id_nasabah" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_asuransi" Type="Int32" Nullable="false" />
+          <Property Name="nama_nasabah" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="no_identitas" Type="Int32" Nullable="false" />
+          <Property Name="tempat_lahir" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="tanggal_lahir" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="jenis_kelamin" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="pekerjaan" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="penghasilan" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="alamat" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="no_telp" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Asuransi_nasabah" Relationship="Self.FK_asuransi_nasabah_Nasabah" FromRole="Nasabah" ToRole="Asuransi_nasabah" />
+          <NavigationProperty Name="Pembayaran_klaim" Relationship="Self.FK_Pembayaran_klaim_Nasabah" FromRole="Nasabah" ToRole="Pembayaran_klaim" />
+          <NavigationProperty Name="Setoran" Relationship="Self.FK_Setoran_Nasabah" FromRole="Nasabah" ToRole="Setoran" />
+        </EntityType>
+        <EntityType Name="Pembayaran_klaim">
+          <Key>
+            <PropertyRef Name="no_pembayaran_klaim" />
+          </Key>
+          <Property Name="no_pembayaran_klaim" Type="Int32" Nullable="false" />
+          <Property Name="id_nasabah" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kode_asuransi" Type="Int32" Nullable="false" />
+          <Property Name="id_pegawai" Type="Int32" Nullable="false" />
+          <Property Name="tanggal_klaim" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="jumlah_bayar" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Pembayaran_klaim_Admin" FromRole="Pembayaran_klaim" ToRole="Admin" />
+          <NavigationProperty Name="Jenis_asuransi" Relationship="Self.FK_Pembayaran_klaim_Jenis_asuransi" FromRole="Pembayaran_klaim" ToRole="Jenis_asuransi" />
+          <NavigationProperty Name="Nasabah" Relationship="Self.FK_Pembayaran_klaim_Nasabah" FromRole="Pembayaran_klaim" ToRole="Nasabah" />
+        </EntityType>
+        <EntityType Name="Setoran">
+          <Key>
+            <PropertyRef Name="no_setoran" />
+          </Key>
+          <Property Name="no_setoran" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_nasabah" Type="Int32" />
+          <Property Name="kode_asuransi" Type="Int32" Nullable="false" />
+          <Property Name="id_pegawai" Type="Int32" />
+          <Property Name="tanggal_setoran" Type="DateTime" Precision="0" />
+          <Property Name="jumlah_bayar" Type="Int32" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Setoran_Admin" FromRole="Setoran" ToRole="Admin" />
+          <NavigationProperty Name="Jenis_asuransi" Relationship="Self.FK_Setoran_Jenis_asuransi" FromRole="Setoran" ToRole="Jenis_asuransi" />
+          <NavigationProperty Name="Nasabah" Relationship="Self.FK_Setoran_Nasabah" FromRole="Setoran" ToRole="Nasabah" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Pembayaran_klaim_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="Pembayaran_klaim" Type="Self.Pembayaran_klaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="id_pegawai" />
+            </Principal>
+            <Dependent Role="Pembayaran_klaim">
+              <PropertyRef Name="id_pegawai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Setoran_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Setoran" Type="Self.Setoran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="id_pegawai" />
+            </Principal>
+            <Dependent Role="Setoran">
+              <PropertyRef Name="id_pegawai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_asuransi_nasabah_Jenis_asuransi">
+          <End Role="Jenis_asuransi" Type="Self.Jenis_asuransi" Multiplicity="1" />
+          <End Role="Asuransi_nasabah" Type="Self.Asuransi_nasabah" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jenis_asuransi">
+              <PropertyRef Name="kode_asuransi" />
+            </Principal>
+            <Dependent Role="Asuransi_nasabah">
+              <PropertyRef Name="kode_asuransi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_asuransi_nasabah_Nasabah">
+          <End Role="Nasabah" Type="Self.Nasabah" Multiplicity="1" />
+          <End Role="Asuransi_nasabah" Type="Self.Asuransi_nasabah" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nasabah">
+              <PropertyRef Name="id_nasabah" />
+            </Principal>
+            <Dependent Role="Asuransi_nasabah">
+              <PropertyRef Name="id_nasabah" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pembayaran_klaim_Jenis_asuransi">
+          <End Role="Jenis_asuransi" Type="Self.Jenis_asuransi" Multiplicity="1" />
+          <End Role="Pembayaran_klaim" Type="Self.Pembayaran_klaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jenis_asuransi">
+              <PropertyRef Name="kode_asuransi" />
+            </Principal>
+            <Dependent Role="Pembayaran_klaim">
+              <PropertyRef Name="kode_asuransi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Setoran_Jenis_asuransi">
+          <End Role="Jenis_asuransi" Type="Self.Jenis_asuransi" Multiplicity="1" />
+          <End Role="Setoran" Type="Self.Setoran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jenis_asuransi">
+              <PropertyRef Name="kode_asuransi" />
+            </Principal>
+            <Dependent Role="Setoran">
+              <PropertyRef Name="kode_asuransi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pembayaran_klaim_Nasabah">
+          <End Role="Nasabah" Type="Self.Nasabah" Multiplicity="1" />
+          <End Role="Pembayaran_klaim" Type="Self.Pembayaran_klaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nasabah">
+              <PropertyRef Name="id_nasabah" />
+            </Principal>
+            <Dependent Role="Pembayaran_klaim">
+              <PropertyRef Name="id_nasabah" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Setoran_Nasabah">
+          <End Role="Nasabah" Type="Self.Nasabah" Multiplicity="0..1" />
+          <End Role="Setoran" Type="Self.Setoran" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nasabah">
+              <PropertyRef Name="id_nasabah" />
+            </Principal>
+            <Dependent Role="Setoran">
+              <PropertyRef Name="id_nasabah" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_asuransiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="Asuransi_nasabah" EntityType="Self.Asuransi_nasabah" />
+          <EntitySet Name="Jenis_asuransi" EntityType="Self.Jenis_asuransi" />
+          <EntitySet Name="Nasabah" EntityType="Self.Nasabah" />
+          <EntitySet Name="Pembayaran_klaim" EntityType="Self.Pembayaran_klaim" />
+          <EntitySet Name="Setoran" EntityType="Self.Setoran" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Pembayaran_klaim_Admin" Association="Self.FK_Pembayaran_klaim_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Pembayaran_klaim" EntitySet="Pembayaran_klaim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Setoran_Admin" Association="Self.FK_Setoran_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Setoran" EntitySet="Setoran" />
+          </AssociationSet>
+          <AssociationSet Name="FK_asuransi_nasabah_Jenis_asuransi" Association="Self.FK_asuransi_nasabah_Jenis_asuransi">
+            <End Role="Jenis_asuransi" EntitySet="Jenis_asuransi" />
+            <End Role="Asuransi_nasabah" EntitySet="Asuransi_nasabah" />
+          </AssociationSet>
+          <AssociationSet Name="FK_asuransi_nasabah_Nasabah" Association="Self.FK_asuransi_nasabah_Nasabah">
+            <End Role="Nasabah" EntitySet="Nasabah" />
+            <End Role="Asuransi_nasabah" EntitySet="Asuransi_nasabah" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pembayaran_klaim_Jenis_asuransi" Association="Self.FK_Pembayaran_klaim_Jenis_asuransi">
+            <End Role="Jenis_asuransi" EntitySet="Jenis_asuransi" />
+            <End Role="Pembayaran_klaim" EntitySet="Pembayaran_klaim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Setoran_Jenis_asuransi" Association="Self.FK_Setoran_Jenis_asuransi">
+            <End Role="Jenis_asuransi" EntitySet="Jenis_asuransi" />
+            <End Role="Setoran" EntitySet="Setoran" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pembayaran_klaim_Nasabah" Association="Self.FK_Pembayaran_klaim_Nasabah">
+            <End Role="Nasabah" EntitySet="Nasabah" />
+            <End Role="Pembayaran_klaim" EntitySet="Pembayaran_klaim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Setoran_Nasabah" Association="Self.FK_Setoran_Nasabah">
+            <End Role="Nasabah" EntitySet="Nasabah" />
+            <End Role="Setoran" EntitySet="Setoran" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_asuransiContextModelStoreContainer" CdmEntityContainer="db_asuransiEntities">
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="db_asuransiContextModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="id_pegawai" ColumnName="id_pegawai" />
+                <ScalarProperty Name="nama_pegawai" ColumnName="nama_pegawai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Asuransi_nasabah">
+            <EntityTypeMapping TypeName="db_asuransiContextModel.Asuransi_nasabah">
+              <MappingFragment StoreEntitySet="Asuransi_nasabah">
+                <ScalarProperty Name="id_asuransi" ColumnName="id_asuransi" />
+                <ScalarProperty Name="id_nasabah" ColumnName="id_nasabah" />
+                <ScalarProperty Name="kode_asuransi" ColumnName="kode_asuransi" />
+                <ScalarProperty Name="uang_nasabah" ColumnName="uang_nasabah" />
+                <ScalarProperty Name="masa_asuransi" ColumnName="masa_asuransi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jenis_asuransi">
+            <EntityTypeMapping TypeName="db_asuransiContextModel.Jenis_asuransi">
+              <MappingFragment StoreEntitySet="Jenis_asuransi">
+                <ScalarProperty Name="kode_asuransi" ColumnName="kode_asuransi" />
+                <ScalarProperty Name="jenis_asuransi1" ColumnName="jenis_asuransi" />
+                <ScalarProperty Name="nilai_asuransi" ColumnName="nilai_asuransi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nasabah">
+            <EntityTypeMapping TypeName="db_asuransiContextModel.Nasabah">
+              <MappingFragment StoreEntitySet="Nasabah">
+                <ScalarProperty Name="id_nasabah" ColumnName="id_nasabah" />
+                <ScalarProperty Name="id_asuransi" ColumnName="id_asuransi" />
+                <ScalarProperty Name="nama_nasabah" ColumnName="nama_nasabah" />
+                <ScalarProperty Name="no_identitas" ColumnName="no_identitas" />
+                <ScalarProperty Name="tempat_lahir" ColumnName="tempat_lahir" />
+                <ScalarProperty Name="tanggal_lahir" ColumnName="tanggal_lahir" />
+                <ScalarProperty Name="jenis_kelamin" ColumnName="jenis_kelamin" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="pekerjaan" ColumnName="pekerjaan" />
+                <ScalarProperty Name="penghasilan" ColumnName="penghasilan" />
+                <ScalarProperty Name="alamat" ColumnName="alamat" />
+                <ScalarProperty Name="no_telp" ColumnName="no_telp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pembayaran_klaim">
+            <EntityTypeMapping TypeName="db_asuransiContextModel.Pembayaran_klaim">
+              <MappingFragment StoreEntitySet="Pembayaran_klaim">
+                <ScalarProperty Name="no_pembayaran_klaim" ColumnName="no_pembayaran_klaim" />
+                <ScalarProperty Name="id_nasabah" ColumnName="id_nasabah" />
+                <ScalarProperty Name="kode_asuransi" ColumnName="kode_asuransi" />
+                <ScalarProperty Name="id_pegawai" ColumnName="id_pegawai" />
+                <ScalarProperty Name="tanggal_klaim" ColumnName="tanggal_klaim" />
+                <ScalarProperty Name="jumlah_bayar" ColumnName="jumlah_bayar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Setoran">
+            <EntityTypeMapping TypeName="db_asuransiContextModel.Setoran">
+              <MappingFragment StoreEntitySet="Setoran">
+                <ScalarProperty Name="no_setoran" ColumnName="no_setoran" />
+                <ScalarProperty Name="id_nasabah" ColumnName="id_nasabah" />
+                <ScalarProperty Name="kode_asuransi" ColumnName="kode_asuransi" />
+                <ScalarProperty Name="id_pegawai" ColumnName="id_pegawai" />
+                <ScalarProperty Name="tanggal_setoran" ColumnName="tanggal_setoran" />
+                <ScalarProperty Name="jumlah_bayar" ColumnName="jumlah_bayar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="db_asuransiContextModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
